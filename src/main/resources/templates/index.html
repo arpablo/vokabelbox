@@ -27,21 +27,6 @@
 <title>Henriettes Vokabeltrainer</title>
 </head>
 <body class="content">
-<!-- 	<div class="container-fluid bg_yellow no-padding"> -->
-<!-- 		<div class="row no-gutters"> -->
-<!-- 			<div class="col-sm-6 col-lg-6"> -->
-<!-- 				<div class="intro"> -->
-<!-- 					<h1 class="uppercase"> -->
-<!-- 						<span class="c_white">Henriettes</span> Vokabeltrainer -->
-<!-- 					</h1> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-sm-6 col-lg-6"> -->
-<!-- 				<img class="img-fluid float-right" -->
-<!-- 					th:src="@{/img/Henriette_small.jpg}" /> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
 	<nav class="navbar navbar-expand-lg navbar-light bg_yellow">
 		<a class="navbar-brand uppercase" href="#"><span class="c_white">Henriettes</span> Vokabeltrainer</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -53,12 +38,55 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link" href="#">Home
-				</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+				<li class="nav-item active"><a class="nav-link" href="#">Start</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Karteikasten</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Einstellungen</a></li>
 			</ul>
 		</div>
 	</nav>
+	
+	<div class="container">
+		<div class="row">
+			<table class="table">
+				<tr th:each="box : ${boxes}">
+					<td th:text="${{box.id}}"></td>
+					<td th:text="${{box.name}}"></td>
+				</tr>
+			</table>
+		</div>
+	    <div class="row">
+	        <div class="form-group col-md-1">
+	            <select class="form-control pagination" id="pageSizeSelect">
+	                <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}"
+	                        th:selected="${pageSize} == ${selectedPageSize}"></option>
+	            </select>
+	        </div>
+	        <div th:if="${boxes.totalPages != 1}" class="form-group col-md-11 pagination-centered">
+	            <ul class="pagination">
+	                <li th:class="${boxes.number == 0} ? disabled">
+	                    <a class="page-link" th:href="@{/(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
+	                </li>
+	                <li th:class="${boxes.number == 0} ? disabled">
+	                    <a class="page-link" th:href="@{/(pageSize=${selectedPageSize}, page=${boxes.number})}">&larr;</a>
+	                </li>
+	                <li th:class="${boxes.number == (page - 1)} ? 'active pointer-disabled'"
+	                    th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+	                    <a class="page-link" th:href="@{/(pageSize=${selectedPageSize}, page=${page})}"
+	                       th:text="${page}"></a>
+	                </li>
+	                <li th:class="${boxes.number + 1 == boxes.totalPages} ? disabled">
+	                    <a class="page-link"
+	                       th:href="@{/(pageSize=${selectedPageSize}, page=${boxes.number + 2})}">&rarr;</a>
+	                </li>
+	                <li th:class="${boxes.number + 1 == boxes.totalPages} ? disabled">
+	                    <a class="page-link"
+	                       th:href="@{/(pageSize=${selectedPageSize}, page=${boxes.totalPages})}">&raquo;</a>
+	                </li>
+	            </ul>
+	        </div>
+	    </div>		
+	</div>
+	
 	<div th:insert="footer :: simple"></div>
 	<script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
 	<script type="text/javascript" th:src="@{/webjars/popper.js/popper.min.js}"></script>

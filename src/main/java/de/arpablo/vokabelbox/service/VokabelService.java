@@ -7,7 +7,9 @@ import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cache.CacheManager;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import de.arpablo.vokabelbox.model.Box;
@@ -39,6 +41,17 @@ public class VokabelService {
 	public Box saveBox(Box box) {
 		log.debug("Saving box " + box);
 		return boxRepo.save(box);
+	}
+	
+	public Page<Box> listAllBoxes(int page, int size) {
+		log.debug("listing boxes");
+		Pageable pageable = PageRequest.of(page, size);
+		return boxRepo.findAll(pageable);
+	}
+	
+	public Page<Box> listAllBoxesByPageable(Pageable pageable) {
+		log.debug("listing boxes");
+		return boxRepo.findAll(pageable);
 	}
 	
 	public Vokabel saveVokabel(Vokabel vokabel) {

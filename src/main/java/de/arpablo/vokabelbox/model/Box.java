@@ -14,6 +14,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author arpablo
@@ -23,6 +24,7 @@ import lombok.Data;
 @Entity
 @Table(name = "arp_box")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@NoArgsConstructor
 public class Box {
 
     @Id
@@ -30,5 +32,9 @@ public class Box {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 	
-	String name;
+	private String name;
+	
+	public Box(String name) {
+		this.name = name;
+	}
 }
