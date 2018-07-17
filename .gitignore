@@ -26,3 +26,5 @@ hs_err_pid*
 .classpath
 /target/
 /node_modules/
+/node/
+/.cache-loader/

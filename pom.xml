@@ -22,10 +22,15 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+        <node.version>v8.11.3</node.version>
+        <yarn.version>v1.6.0</yarn.version>
 		
 		<!-- Webjars -->
 		<webjars-bootstrap.version>4.0.0-1</webjars-bootstrap.version>
 		<webjars-jquery.version>3.3.1-1</webjars-jquery.version>
+		
+		<!-- Plugins -->
+        <frontend-maven-plugin.version>1.6</frontend-maven-plugin.version>
 		
 	</properties>
 
@@ -101,5 +106,46 @@
 		</plugins>
 	</build>
 
+
+	<profiles>
+        <profile>
+            <id>webpack</id>
+<!--             <activation> -->
+<!--             	<activeByDefault>true</activeByDefault> -->
+<!--             </activation> -->
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <version>${frontend-maven-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>install node and yarn</id>
+                                <goals>
+                                    <goal>install-node-and-yarn</goal>
+                                </goals>
+                                <configuration>
+                                    <nodeVersion>${node.version}</nodeVersion>
+                                    <yarnVersion>${yarn.version}</yarnVersion>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>webpack build dev</id>
+                                <goals>
+                                    <goal>yarn</goal>
+                                </goals>
+                                <phase>generate-resources</phase>
+                                <configuration>
+                                    <arguments>run webpack:build</arguments>
+                                    <yarnInheritsProxyConfigFromMaven>false</yarnInheritsProxyConfigFromMaven>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+	</profiles>
 
 </project>
