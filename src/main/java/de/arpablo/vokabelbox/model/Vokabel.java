@@ -40,6 +40,7 @@ public class Vokabel {
     @EqualsAndHashCode.Include
     private Long id;
 
+    @Column(name="level")
     private int level = 1;
     @Column(name = "source_text")
 	private String sourceText;

@@ -1,7 +1,7 @@
-insert into arp_box(id, name) values (1,'Substantive');
-insert into arp_box(id, name) values (2, 'Verben');
-insert into arp_box(id, name) values (3, 'Adjektive');
-insert into arp_box(id, name) values (4, 'Zahlen');
+insert into arp_box(id, box_name) values (1,'Substantive');
+insert into arp_box(id, box_name) values (2, 'Verben');
+insert into arp_box(id, box_name) values (3, 'Adjektive');
+insert into arp_box(id, box_name) values (4, 'Zahlen');
 
 insert into arp_vocab(id, level, source_text, target_text) values(1,1,'hübsch','guapo/a');
 insert into arp_vocab(id, level, source_text, target_text) values(2,1,'groß','alto/a');

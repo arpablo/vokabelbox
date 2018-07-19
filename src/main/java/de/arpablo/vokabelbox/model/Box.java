@@ -6,6 +6,7 @@ package de.arpablo.vokabelbox.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -39,6 +40,7 @@ public class Box {
     @EqualsAndHashCode.Include
     private Long id;
 	
+	@Column(name="box_name")
 	private String name;
 	
     @ManyToMany
