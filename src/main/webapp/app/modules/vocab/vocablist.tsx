@@ -1,9 +1,37 @@
 import * as React from "react";
 import { Button, Table, Row, Badge } from "reactstrap";
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+import { IBox } from "app/shared/model/box.model";
+interface IVocabListProps {}
 
-export default class VocabList extends React.Component {
+interface IVocabListState {
+  isLoading: boolean;
+  vocabs: IBox[];
+}
+export default class VocabList extends React.Component<
+  IVocabListProps,
+  IVocabListState
+> {
+  constructor(props: IVocabListProps) {
+    super(props);
+    this.state = {
+      isLoading: true,
+      vocabs: []
+    };
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:8080/api/repo/boxes")
+      .then(response => response.json())
+      .then(data =>
+        this.setState({ isLoading: false, vocabs: data._embedded.boxes })
+      );
+  }
+
   render() {
+    if (this.state.isLoading) {
+      return <p>Loading...</p>;
+    }
     return (
       <div>
         <Table responsive striped>
@@ -16,7 +44,7 @@ export default class VocabList extends React.Component {
           </thead>
           <tbody>
             <tr>
-              <td>Test</td>
+              <td>{this.state.vocabs[1].name}</td>
               <td>teste</td>
               <td className="text-right">
                 <Button>
