@@ -2,7 +2,9 @@ import * as React from "react";
 import { Button, Table, Row, Badge } from "reactstrap";
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import { IBox } from "app/shared/model/box.model";
-interface IVocabListProps {}
+interface IVocabListProps {
+  path: string;
+}
 
 interface IVocabListState {
   isLoading: boolean;

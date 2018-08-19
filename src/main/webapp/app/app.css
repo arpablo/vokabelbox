@@ -12,7 +12,7 @@ h4 {
 }
 
 body {
-  background: #e4e5e6;
+  background: white;
 }
 
 a {
@@ -23,6 +23,15 @@ a {
 a:hover {
   color: #533f03;
   font-weight: bold;
+}
+
+.container,
+.container-fluid {
+  margin-top: 20px;
+}
+
+.wfrog {
+  margin-top: 2rem;
 }
 
 /* ==========================================================================

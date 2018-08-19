@@ -1,19 +1,16 @@
 import "./app.css";
 
 import * as React from "react";
-import { Container } from "reactstrap";
 import AppNavbar from "./navigation";
-import VocabList from "app/modules/vocab/vocablist";
+import BoxList from "app/modules/box/boxlist";
 
 export default class App extends React.Component {
   render() {
     const paddingTop = "60px";
     return (
-      <div className="app-container" style={{ paddingTop }}>
+      <div className="app">
         <AppNavbar />
-        <Container fluid>
-          <VocabList />
-        </Container>
+        <BoxList />
       </div>
     );
   }
