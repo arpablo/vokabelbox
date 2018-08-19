@@ -32,7 +32,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table(name = "arp_vocab")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Vokabel {
+public class Vocab {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")

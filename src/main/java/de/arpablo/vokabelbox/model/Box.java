@@ -48,7 +48,7 @@ public class Box {
     @JoinTable(name = "arp_box2vocab",
                joinColumns = @JoinColumn(name = "box_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "vocab_id", referencedColumnName = "id"))
-	private Set<Vokabel> vocabs = new HashSet<>();
+	private Set<Vocab> vocabs = new HashSet<>();
 	
 	public Box() {
 		
@@ -58,7 +58,7 @@ public class Box {
 		this.name = name;
 	}
 	
-	public Box addVocab(Vokabel vocab) {
+	public Box addVocab(Vocab vocab) {
 		this.vocabs.add(vocab);
 		vocab.getBoxes().add(this);
 		return this;

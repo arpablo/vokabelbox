@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Button, ButtonGroup, Table, Container } from "reactstrap";
+import { Button, ButtonGroup, Table, Td, Th, Container } from "reactstrap";
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import { IBox } from "app/shared/model/box.model";
 import { Navigation } from "app/shared/model/navigation.model";
-import { Navigator } from "../navigator";
+import { Navigator } from "app/modules/navigator";
 interface IBoxListProps {
   path: string;
 }
@@ -32,7 +32,7 @@ export default class BoxList extends React.Component<{}, IBoxListState> {
           nav: new Navigation(data._links),
           boxes: data._embedded.boxes
         });
-        alert(JSON.stringify(this.state.nav));
+        // alert(JSON.stringify(this.state.nav));
       });
   }
 
@@ -42,7 +42,7 @@ export default class BoxList extends React.Component<{}, IBoxListState> {
     }
     const boxList = this.state.boxes.map(box => (
       <tr key={box.id}>
-        <td>{box.name}</td>
+        <Td>{box.name}</Td>
         <td>
           <ButtonGroup className="float-right">
             <Button size="sm" color="primary">
@@ -65,13 +65,12 @@ export default class BoxList extends React.Component<{}, IBoxListState> {
           <Table hover responsive size="sm">
             <thead>
               <tr>
-                <th>Name</th>
-                <th width="20%">Aktion</th>
+                <Th>Name</Th>
+                <Th width="20%">Aktion</Th>
               </tr>
             </thead>
             <tbody>{boxList}</tbody>
           </Table>
-          <p>Hallo {JSON.stringify(this.state.nav.self())} Test</p>
           <Navigator />
         </div>
       </Container>
